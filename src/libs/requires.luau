@@ -3,6 +3,9 @@ return function(Config)
         -- Ensure the path is a string
         assert(type(path) == "string", "invalid argument #1 to 'requireL' (string expected, got " .. type(path) .. ")", 2)
 
+        -- Info Print
+        warn("requireL used.")
+
         -- Construct the URL to fetch the script from GitHub
         local url = string.format("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s",
             Config.githubUsername, -- 1
@@ -21,5 +24,12 @@ return function(Config)
         else
             error("Failed to fetch script from: " .. url .. " | Error: " .. response.StatusCode)
         end
+    end
+
+    getgenv().tableSupportedGames = function()
+        warn("tableSupportedGames used.")
+        local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
+        local jsonContent = requireL("games.json") -- Use requireL to fetch the JSON conten
+        return HttpService:JSONDecode(jsonContent) -- Parse the JSON into a Lua table
     end
 end
