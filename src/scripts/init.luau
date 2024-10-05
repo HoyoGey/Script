@@ -1,4 +1,5 @@
 -- Automatically populate GameScripts from a JSON file on GitHub
+print("started - src/scripts/init")
 
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
@@ -15,7 +16,7 @@ local jsonUrl = string.format("https://raw.githubusercontent.com/%s/%s/refs/head
 -- Fetch and parse the JSON file from GitHub
 local function loadGameScripts()
     local success, result = pcall(function()
-        local jsonContent = game:HttpGet(jsonUrl) -- ty Frost Im Just Dumb:(
+        local jsonContent = print(game:HttpGet(jsonUrl)) -- ty Frost Im Just Dumb:(
         -- local jsonContent = request({Url = jsonUrl; Method = "GET"}.Body) -- Correctly using HttpService to fetch the JSON content
         warn("json url:", jsonUrl)
         warn("json content:", jsonContent)
