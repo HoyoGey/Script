@@ -4,11 +4,11 @@ return function(Config)
         assert(type(path) == "string", "invalid argument #1 to 'requireL' (string expected, got " .. type(path) .. ")", 2)
 
         -- Construct the URL to fetch the script from GitHub
-        local url = string.format("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s.luau",
-            Config.githubUsername,
-            Config.githubRepo,
-            Config.githubBranch,
-            path
+        local url = string.format("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s",
+            Config.githubUsername, -- 1
+            Config.githubRepo,     -- 2
+            Config.githubBranch,   -- 3
+            path                   -- 4
         )
 
         -- Make the request to the URL

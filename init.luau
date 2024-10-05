@@ -26,10 +26,10 @@ end
 -- Function to load and run the correct script
 local function runScript()
     if GameScripts.placeScripts[placeId] then
-        local url = Config.getScriptUrl(GameScripts.placeScripts[placeId]) -- Get the script URL
+        local url = GameScripts.placeScripts[placeId] -- Get the script URL
         loadAndRunScriptFromUrl(url)
     elseif GameScripts.gameIdScripts[gameId] then
-        local url = Config.getScriptUrl(GameScripts.gameIdScripts[gameId]) -- Get the script URL
+        local url = GameScripts.gameIdScripts[gameId] -- Get the script URL
         loadAndRunScriptFromUrl(url)
     else
         print("No script available for this PlaceId/GameId")
