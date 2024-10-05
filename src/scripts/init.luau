@@ -2,23 +2,14 @@
 print("started - src/scripts/init")
 
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
+-- local requireL = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config) -- Load requireL with Config
 local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
 local GameScripts = {}
 
--- URL to the games.json file in your GitHub repository
-local jsonUrl = string.format("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s/games.json",
-    Config.githubUsername,
-    Config.githubRepo,
-    Config.githubBranch,
-    Config.scriptPath
-)
-
--- Fetch and parse the JSON file from GitHub
+-- Fetch and parse the JSON file from GitHub using requireL
 local function loadGameScripts()
     local success, result = pcall(function()
-        local jsonContent = print(game:HttpGet(jsonUrl)) -- ty Frost Im Just Dumb:(
-        -- local jsonContent = request({Url = jsonUrl; Method = "GET"}.Body) -- Correctly using HttpService to fetch the JSON content
-        warn("json url:", jsonUrl)
+        local jsonContent = requireL("games.json") -- Use requireL to fetch the JSON content
         warn("json content:", jsonContent)
         return HttpService:JSONDecode(jsonContent) -- Parse the JSON into a Lua table
     end)
