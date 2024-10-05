@@ -2,7 +2,7 @@
 print("started - src/scripts/init")
 
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
--- local requireL = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config) -- Load requireL with Config
+local requireL = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config) -- Load requireL with Config
 local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
 local GameScripts = {}
 

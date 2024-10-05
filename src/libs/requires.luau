@@ -13,6 +13,7 @@ return function(Config)
 
         -- Make the request to the URL
         local response = request({Url = url; Method = "GET";})
+        print("Get Request on Url:", url)
 
         -- Check if the response is successful
         if response.Success then
