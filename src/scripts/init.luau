@@ -1,6 +1,6 @@
 -- Automatically populate GameScripts from a JSON file on GitHub
 
-local Config = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
+local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
 local GameScripts = {}
 

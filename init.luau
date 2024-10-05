@@ -1,6 +1,6 @@
 -- init.luau
-local GameScripts = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/init.luau"))() -- Load the GameScripts module
-local Config = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
+local GameScripts = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/init.luau"))() -- Load the GameScripts module
+local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 
 local placeId = game.PlaceId
 local gameId = game.GameId
@@ -8,7 +8,7 @@ local gameId = game.GameId
 -- Function to fetch and execute the script from GitHub
 local function loadAndRunScriptFromUrl(url)
     local success, result = pcall(function()
-        local scriptContent = game:HttpGetAsync(url) -- Fetch the script content from GitHub
+        local scriptContent = game:HttpGet(url) -- Fetch the script content from GitHub
         local scriptFunction = loadstring(scriptContent) -- Load the script as a function
         return scriptFunction
     end)
