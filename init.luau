@@ -4,7 +4,7 @@ local GameScripts = loadstring(game:HttpGet("https://raw.githubusercontent.com/H
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 
 -- Load requireL from an external file and initialize it with Config
---loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config)
 
 local placeId = game.PlaceId
 local gameId = game.GameId
