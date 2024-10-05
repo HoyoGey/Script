@@ -9,7 +9,7 @@ local GameScripts = {}
 -- Fetch and parse the JSON file from GitHub using requireL
 local function loadGameScripts()
     local success, result = pcall(function()
-        local jsonContent = requireL("games.json") -- Use requireL to fetch the JSON content
+        local jsonContent = getgenv().requireL("games.json") -- Use requireL to fetch the JSON content
         warn("json content:", jsonContent)
         return HttpService:JSONDecode(jsonContent) -- Parse the JSON into a Lua table
     end)
