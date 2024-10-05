@@ -11,7 +11,8 @@ local gameId = game.GameId
 -- Function to fetch and execute the script from GitHub
 local function loadAndRunScriptFromUrl(url)
     local success, result = pcall(function()
-        local scriptContent = requireL(url) -- Fetch the script content from GitHub
+        local scriptContent = requireL(url)
+        print("eh",url) -- Fetch the script content from GitHub
         local scriptFunction = loadstring(scriptContent) -- Load the script as a function
         return scriptFunction
     end)
@@ -27,9 +28,11 @@ end
 local function runScript()
     if GameScripts.placeScripts[placeId] then
         local url = GameScripts.placeScripts[placeId] -- Get the script URL
+        print(url)
         loadAndRunScriptFromUrl(url)
     elseif GameScripts.gameIdScripts[gameId] then
         local url = GameScripts.gameIdScripts[gameId] -- Get the script URL
+        print(url)
         loadAndRunScriptFromUrl(url)
     else
         print("No script available for this PlaceId/GameId")
