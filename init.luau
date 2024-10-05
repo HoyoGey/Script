@@ -4,10 +4,12 @@ local GameScripts = loadstring(game:HttpGet("https://raw.githubusercontent.com/H
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 
 -- Load requireL from an external file and initialize it with Config
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config)
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/requireL.luau"))()(Config)
 
 local placeId = game.PlaceId
 local gameId = game.GameId
+
+print(placeId, gameId)
 
 -- Function to fetch and execute the script from GitHub
 local function loadAndRunScriptFromUrl(url)
@@ -33,18 +35,38 @@ end
 
 -- Function to load and run the correct script
 local function runScript()
-    if GameScripts.placeScripts[placeId] then
-        local gameUrl = GameScripts.placeScripts[placeId] -- Get the script URL
-        print("PlaceId script found for place:", placeId, "URL:", gameUrl) -- Added debugging print
-        loadAndRunScriptFromUrl(gameUrl)
-    elseif GameScripts.gameIdScripts[gameId] then
-        local gameUrl = GameScripts.gameIdScripts[gameId] -- Get the script URL
-        print("GameId script found for game:", gameId, "URL:", gameUrl) -- Added debugging print
-        loadAndRunScriptFromUrl(gameUrl)
-    else
-        warn("No script available for this PlaceId/GameId")
+    local gameUrl
+
+    -- Look for the matching placeId script
+    for id, url in pairs(GameScripts.placeScripts) do
+        if id == placeId then
+            gameUrl = url
+            print("PlaceId script found for place:", placeId, "URL:", gameUrl)
+            break -- Exit the loop once the script is found
+        end
     end
+
+    -- If no placeId script is found, check for gameId script
+    if not gameUrl then
+        for id, url in pairs(GameScripts.gameIdScripts) do
+            if id == gameId then
+                gameUrl = url
+                print("GameId script found for game:", gameId, "URL:", gameUrl)
+                break -- Exit the loop once the script is found
+            end
+        end
+    end
+
+    -- If a matching script URL is found, load and run it
+    print(gameUrl)
+    -- if gameUrl then
+    --     -- loadAndRunScriptFromUrl(gameUrl)
+    --     loadstring(game:HttpGet(gameUrl))()
+    -- else
+    --     warn("No script available for this PlaceId/GameId")
+    -- end
 end
+
 
 -- Run the appropriate script
 runScript()
