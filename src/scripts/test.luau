@@ -1,4 +1,4 @@
--- PlaceId: 123456789
--- GameId: 111111111
+-- PlaceId: 893973440
+-- GameId: 893973440
 
 print("This is Game 1 script")
