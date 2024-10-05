@@ -1,8 +1,8 @@
 {
     "placeScripts": {
-        "893973440": "test"
+        "893973440": "https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/test.luau"
     },
     "gameIdScripts": {
-        "893973440": "test"
+        "893973440": "https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/test.luau"
     }
 }

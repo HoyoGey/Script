@@ -1,5 +1,5 @@
 print("started - /init")
--- local GameScripts = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/init.luau"))() -- Load the GameScripts module
+local GameScripts = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/init.luau"))() -- Load the GameScripts module
 local Config = loadstring(game:HttpGet("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 
 -- Load requireL from an external file and initialize it with Config
@@ -10,10 +10,10 @@ local gameId = game.GameId
 
 -- Function to fetch and execute the script from GitHub
 local function loadAndRunScriptFromUrl(url)
+    print("eh",url)
     local success, result = pcall(function()
-        local scriptContent = requireL(url)
-        print("eh",url) -- Fetch the script content from GitHub
-        local scriptFunction = loadstring(scriptContent) -- Load the script as a function
+         -- Fetch the script content from GitHub
+        local scriptFunction = loadstring(game:HttpGet(url))() -- Load the script as a function
         return scriptFunction
     end)
 
@@ -27,15 +27,15 @@ end
 -- Function to load and run the correct script
 local function runScript()
     if GameScripts.placeScripts[placeId] then
-        local url = GameScripts.placeScripts[placeId] -- Get the script URL
-        print(url)
-        loadAndRunScriptFromUrl(url)
+        local gameUrl = GameScripts.placeScripts[placeId] -- Get the script URL
+        warn(gameUrl)
+        loadAndRunScriptFromUrl(gameUrl)
     elseif GameScripts.gameIdScripts[gameId] then
-        local url = GameScripts.gameIdScripts[gameId] -- Get the script URL
-        print(url)
-        loadAndRunScriptFromUrl(url)
+        local gameUrl = GameScripts.gameIdScripts[gameId] -- Get the script URL
+        warn(gameUrl)
+        loadAndRunScriptFromUrl(gameUrl)
     else
-        print("No script available for this PlaceId/GameId")
+        warn("No script available for this PlaceId/GameId")
     end
 end
 
