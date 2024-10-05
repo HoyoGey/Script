@@ -1,5 +1,6 @@
 -- init.luau
-local GameScripts = require(script:WaitForChild("GameScripts")) -- Load the GameScripts module
+local GameScripts = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/init.luau"))() -- Load the GameScripts module
+local Config = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 
 local HttpService = game:GetService("HttpService")
 local placeId = game.PlaceId

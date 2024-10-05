@@ -1,1 +1,8 @@
-{}
+{
+    "placeScripts": {
+        "123456789": "test"
+    },
+    "gameIdScripts": {
+        "111111111": "test"
+    }
+}

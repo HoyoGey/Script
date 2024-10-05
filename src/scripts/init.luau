@@ -1,11 +1,11 @@
 -- Automatically populate GameScripts from a JSON file on GitHub
 
-local Config = require(script:WaitForChild("Config")) -- Load the Config module
+local Config = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/libs/giturl.luau"))() -- Load the Config module
 local HttpService = game:GetService("HttpService") -- HttpService for fetching the JSON
 local GameScripts = {}
 
 -- URL to the games.json file in your GitHub repository
-local jsonUrl = string.format("https://raw.githubusercontent.com/%s/%s/%s/%s/games.json",
+local jsonUrl = string.format("https://raw.githubusercontent.com/%s/%s/refs/heads/%s/%s/games.json",
     Config.githubUsername,
     Config.githubRepo,
     Config.githubBranch,
