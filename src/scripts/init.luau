@@ -16,6 +16,7 @@ local function loadGameScripts()
 
     if success and result then
         GameScripts = result
+        print(GameScripts)
         -- GameScripts.placeScripts = result.placeScripts -- Set PlaceId scripts
         -- GameScripts.gameIdScripts = result.gameIdScripts -- Set GameId scripts
     else
