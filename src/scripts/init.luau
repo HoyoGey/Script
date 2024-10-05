@@ -15,7 +15,7 @@ local jsonUrl = string.format("https://raw.githubusercontent.com/%s/%s/refs/head
 -- Fetch and parse the JSON file from GitHub
 local function loadGameScripts()
     local success, result = pcall(function()
-        local jsonContent = HttpService:HttpGet(jsonUrl) -- Fetch the JSON content
+        local jsonContent = game:HttpGetAsync(jsonUrl) -- Fetch the JSON content
         return HttpService:JSONDecode(jsonContent) -- Parse the JSON into a Lua table
     end)
 
