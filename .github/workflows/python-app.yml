@@ -21,22 +21,23 @@ jobs:
         with:
           python-version: "3.10"  # Use Python 3.10 or specify your preferred version
 
-      # Step 3: Install dependencies
+      # Step 3: Install Python Dependencies (if any)
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install json
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
 
       # Step 4: Run the update_games_json.py script
       - name: Run Script to Update games.json
         run: |
           python update_games_json.py
 
-      # Step 5: Commit and push changes if games.json is updated
+      # Step 5: Commit and Push Changes
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "hoyo8020@gmail.com"  # Replace with your email
-          git config --local user.name "HoyoGey"     # Replace with your GitHub username
+          git config --local user.email "your-email@example.com"  # Replace with your email
+          git config --local user.name "your-github-username"     # Replace with your GitHub username
           git add games.json
           git diff-index --quiet HEAD || git commit -m "Update games.json"
           git push
