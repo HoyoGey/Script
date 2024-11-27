@@ -1,0 +1,44 @@
+# GitHub Actions workflow to run update_games_json.py and commit changes
+name: Update games.json
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on pushes to the 'main' branch
+
+jobs:
+  update-games-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"  # Use Python 3.10 or specify your preferred version
+
+      # Step 3: Install dependencies
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install json
+
+      # Step 4: Run the update_games_json.py script
+      - name: Run Script to Update games.json
+        run: |
+          python update_games_json.py
+
+      # Step 5: Commit and push changes if games.json is updated
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "hoyo8020@gmail.com"  # Replace with your email
+          git config --local user.name "HoyoGey"     # Replace with your GitHub username
+          git add games.json
+          git diff-index --quiet HEAD || git commit -m "Update games.json"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
