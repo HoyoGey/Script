@@ -6,6 +6,9 @@ on:
     branches:
       - main  # Trigger workflow on pushes to the 'main' branch
 
+permissions:
+  contents: write
+
 jobs:
   update-games-json:
     runs-on: ubuntu-latest
