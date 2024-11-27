@@ -36,8 +36,8 @@ jobs:
       # Step 5: Commit and Push Changes
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "your-email@example.com"  # Replace with your email
-          git config --local user.name "your-github-username"     # Replace with your GitHub username
+          git config --local user.email "hoyo8020@gmail.com"
+          git config --local user.name "HoyoGey"
           git add games.json
           git diff-index --quiet HEAD || git commit -m "Update games.json"
           git push
