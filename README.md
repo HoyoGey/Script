@@ -6,39 +6,51 @@ how to make auto update games.json?
 
 Create yml file in git repo by this path `.github/workflows/update_games_json.yml` and in:
 ```yml
+# GitHub Actions workflow to run update_games_json.py and commit changes
 name: Update games.json
 
 on:
   push:
     branches:
-      - main  # or any branch you want to trigger the update
+      - main  # Trigger workflow on pushes to the 'main' branch
+
+permissions:
+  contents: write
 
 jobs:
-  update-json:
+  update-games-json:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
+      # Step 2: Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.x'
+          python-version: "3.10"  # Use Python 3.10 or specify your preferred version
 
-      - name: Install dependencies
+      # Step 3: Install Python Dependencies (if any)
+      - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run update_games_json.py script
+
+      # Step 4: Run the update_games_json.py script
+      - name: Run Script to Update games.json
         run: |
           python update_games_json.py
 
-      - name: Commit and push changes
+      # Step 5: Commit and Push Changes
+      - name: Commit and Push Changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "@gmail.com"
+          git config --local user.name ""
           git add games.json
-          git commit -m "Update games.json"
+          git diff-index --quiet HEAD || git commit -m "Update games.json"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
