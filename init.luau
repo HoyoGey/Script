@@ -30,50 +30,45 @@ end
 
 getgenv().tableSupportedGames = function()
     warn("tableSupportedGames used.")
-    local jsonContent = requireL("games.json") -- Use requireL to fetch the JSON conten
+    local jsonContent = requireL("games.json") -- Use requireL to fetch the JSON content
     warn("json content:", jsonContent)
     return HttpService:JSONDecode(jsonContent) -- Parse the JSON into a Lua table
 end
 
-local placeId = game.PlaceId
-local gameId = game.GameId
-
--- local jsonContent = requireL("games.json")
--- warn("json content:", jsonContent)
--- local GameScripts = HttpService:JSONDecode(jsonContent)
+local placeId = tostring(game.PlaceId) -- Ensure IDs are strings for comparison
+local gameId = tostring(game.GameId)
 
 local GameScripts = tableSupportedGames()
 
-_G.gameUrl = ""
+_G.gameUrl = "" -- Initialize global variable for script URL
 
 -- Function to load and run the correct script
 local function runScript()
-    -- Look for the matching placeId script
-    for id, url in pairs(GameScripts.placeScripts) do
-        if id == placeId then
-            _G.gameUrl = url
-            print("PlaceId script found for place:", placeId, "URL:", gameUrl)
-        end
+    -- Look for the matching PlaceId script
+    if GameScripts.placeScripts[placeId] then
+        _G.gameUrl = GameScripts.placeScripts[placeId]
+        print("PlaceId script found for place:", placeId, "URL:", _G.gameUrl)
     end
 
-    -- If no placeId script is found, check for gameId script
-    if not _G.gameUrl then
-        for id, url in pairs(GameScripts.gameIdScripts) do
-            if id == gameId then
-                _G.gameUrl = url
-                print("GameId script found for game:", gameId, "URL:", gameUrl)
-            end
-        end
+    -- If no PlaceId script is found, check for GameId script
+    if _G.gameUrl == "" and GameScripts.gameIdScripts[gameId] then
+        _G.gameUrl = GameScripts.gameIdScripts[gameId]
+        print("GameId script found for game:", gameId, "URL:", _G.gameUrl)
     end
 
-    print(_G.gameUrl )
-    if _G.gameUrl then
-        print("yay")
+    -- Load and run the script from the URL
+    if _G.gameUrl ~= "" then
+        print("Executing script from URL:", _G.gameUrl)
+        local success, err = pcall(function()
+            loadstring(game:HttpGet(_G.gameUrl))() -- Fetch and execute the script
+        end)
+        if not success then
+            warn("Failed to execute script from URL:", _G.gameUrl, "| Error:", err)
+        end
     else
-        warn("Nothing")
+        warn("No matching script found for PlaceId:", placeId, "or GameId:", gameId)
     end
 end
 
 -- Run the appropriate script
 runScript()
-print("wqhy")
