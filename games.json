@@ -1,5 +1,6 @@
 {
     "placeScripts": {
+        "73956553001240": "https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/Haikyuu.luau",
         "16732694052": "https://raw.githubusercontent.com/HoyoGey/Script/refs/heads/main/src/scripts/Fisch.luau"
     },
     "gameIdScripts": {
