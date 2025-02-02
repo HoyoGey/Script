@@ -243,8 +243,8 @@ function module.AddSettingsSection(Main)
         Name = "Toggle GUI Bind",
         Default = Enum.KeyCode.LeftControl,
         Callback = function()
-            if shared.NapkinLibrary then
-                shared.NapkinLibrary.Enabled = not shared.NapkinLibrary.Enabled
+            if shared.NapkinGUILibrary then
+                shared.NapkinGUILibrary.Enabled = not shared.NapkinGUILibrary.Enabled
             end
         end
     })
